@@ -9,14 +9,17 @@ import sqlite3
 
 class DictPipeline(object):
     def __init__(self):
+        # create connection
         self.create_connection()
         self.create_table()
 
     def create_connection(self):
+        #connect with db
         self.conn = sqlite3.connect("dict.db")
         self.curr = self.conn.cursor()
 
     def create_table(self):
+        #create table
         self.curr.execute("""DROP TABLE IF EXISTS dict_tb""")
         self.curr.execute("""CREATE TABLE dict_tb(
                                 word text,
@@ -27,6 +30,7 @@ class DictPipeline(object):
         return item
 
     def store_db(self, item):
+        #insert data
         self.curr.execute("""INSERT INTO dict_tb VALUES (?, ?) """, (item['word'], item['meaning'])
                           )
         self.conn.commit()

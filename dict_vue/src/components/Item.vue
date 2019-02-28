@@ -43,13 +43,6 @@ export default {
         .get('http://127.0.0.1:5000?word=' + this.search)
         .then(response => (this.info = response.data.results))
     }
-  },
-  computed: {
-    filteredWords () {
-      return this.info.filter(i => {
-        return i.word.match(this.search)
-      })
-    }
   }
 }
 </script>
